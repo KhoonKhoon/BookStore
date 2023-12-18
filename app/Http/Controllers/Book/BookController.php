@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Book;
 
-use App\Http\Controllers\Controller;
+use App\Models\Book\Book;
 use Illuminate\Http\Request;
+use App\Models\Author\Author;
+use App\Interfaces\BookInterface;
+use App\Models\Category\Category;
+use App\Http\Controllers\Controller;
 
 class BookController extends Controller
 {
@@ -12,9 +16,19 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(BookInterface $bookInterface)
+    {
+        $this->bookInterface = $bookInterface;
+    }
+
     public function index()
     {
         //
+        // $authors = Author::all();
+        // $categories = Category::all();
+        $books= $this->bookInterface->getAllBooks();
+return view('books.index', compact('books'));
+
     }
 
     /**
@@ -25,6 +39,7 @@ class BookController extends Controller
     public function create()
     {
         //
+        return $this->bookInterface->create();
     }
 
     /**
@@ -35,7 +50,8 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->bookInterface->store($request->all());
+
     }
 
     /**
@@ -44,9 +60,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
-        //
+        return $this->bookInterface->show($book);
     }
 
     /**
@@ -55,9 +71,10 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
         //
+        return $this->bookInterface->edit($book);
     }
 
     /**
@@ -78,8 +95,10 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Book $book)
     {
         //
+        // dd('controller');
+        return $this->bookInterface->delete($book);
     }
 }

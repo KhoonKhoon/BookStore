@@ -20,9 +20,15 @@ class CheckUserMiddleware
             case 'user':
                 $requestedUserId = $request->route('user') ? $request->route('user')->id : null;
                 break;
-            // case 'task':
-            //     $requestedUserId = $request->route('task') ? $request->route('task')->assign_officer_id : null;
-            //     break;
+             case 'category':
+                $requestedUserId = $request->route('category') ? $request->route('category');
+                break;
+            case 'book':
+                $requestedUserId = $request->route('book') ? $request->route('book')->user_id : null;
+                break;
+            case 'author':
+                $requestedUserId = $request->route('author') ? $request->route('author')->user_id : null;
+                break;
             // case 'task_operation':
             //     $requestedUserId = $request->route('task_operation') ? $request->route('task_operation')->user_id : null;
             //     break;
@@ -38,4 +44,5 @@ class CheckUserMiddleware
             default:
                 $requestedUserId = null;
     }
+}
 }

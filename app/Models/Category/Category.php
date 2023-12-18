@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\Author;
+namespace App\Models\Category;
 
+use App\Models\Book\Book;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Author extends Model
+class Category extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
-
     public function books()
     {
         return $this->hasMany(Book::class);

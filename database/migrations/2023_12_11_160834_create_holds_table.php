@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use League\CommonMark\Extension\Table\Table;
 
-class CreatePublishersTable extends Migration
+class CreateHoldsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +14,12 @@ class CreatePublishersTable extends Migration
      */
     public function up()
     {
-        Schema::create('publishers', function (Blueprint $table) {
+        Schema::create('holds', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
+            $table->integer('book_copy_id');
+            $table->integer('patron_id');
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreatePublishersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publishers');
+        Schema::dropIfExists('holds');
     }
 }

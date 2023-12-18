@@ -3134,7 +3134,7 @@ textarea.form-control-lg {
 
 .btn-link {
   --bs-btn-font-weight: 400;
-  --bs-btn-color: var(--bs-link-color);
+  /* --bs-btn-color: var(--bs-link-color); */
   --bs-btn-bg: transparent;
   --bs-btn-border-color: transparent;
   --bs-btn-hover-color: var(--bs-link-hover-color);
@@ -3146,6 +3146,7 @@ textarea.form-control-lg {
   --bs-btn-box-shadow: none;
   --bs-btn-focus-shadow-rgb: 49, 132, 253;
   text-decoration: underline;
+  --bs-btn-margin-left: auto;
 }
 .btn-link:focus-visible {
   color: var(--bs-btn-color);
@@ -10921,13 +10922,13 @@ body {
 
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
-  width: 225px;
+  width: 200px;
   height: 100vh;
   z-index: 1038;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav {
   padding-top: 56px;
-  background-color: #1F2E10;
+  background-color: #343a409;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav .sb-sidenav-menu {
   overflow-y: auto;
@@ -11038,7 +11039,8 @@ body {
   color: rgba(255, 255, 255, 0.25);
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
-background-color: #336206;;}
+}
+
 .sb-sidenav-dark .sb-sidenav-menu .nav-link.active {
   color: #fff;
 }
@@ -11242,4 +11244,10 @@ background-color: #336206;;}
   width: 20px !important;
   font-size: 0.75rem;
   border-radius: 0.375rem !important;
+}
+.btn-new {
+    background-color: #A1CE3F;
+}
+.card .card-body .btn-sublit {
+    background-color: #A1CE3F;
 }
