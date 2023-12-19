@@ -54,7 +54,9 @@ Route::group(['prefix'=>'books','as'=>'book.'], function(){
  */
 
     Route::group(['prefix'=>'authors','as'=>'author.'], function(){
-        Route::get('/index', App\Http\Controllers\Author\AuthorController::class, 'index'])->name('index');
+        Route::get('/index', [App\Http\Controllers\Author\AuthorController::class, 'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\Author\AuthorController::class, 'create'])->name('create');
+
     });
 //         Route::get('/index', [App\Http\Controllers\Author\AuthorController::class, 'index'])->name('index');
 //         Route::get('/create', [App\Http\Controllers\Author\AuthorController::class, 'create'])->name('create');
