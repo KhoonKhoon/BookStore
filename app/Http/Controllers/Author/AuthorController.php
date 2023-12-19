@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Permission;
+namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +15,7 @@ class PermissionController extends Controller
     public function index()
     {
         //
+        dd('ww');
     }
 
     /**

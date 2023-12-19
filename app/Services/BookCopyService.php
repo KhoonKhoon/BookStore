@@ -2,31 +2,35 @@
 
 namespace App\Services;
 
+use App\Models\Book\Book;
 use App\Models\Category\Category;
 use Illuminate\Support\Facades\DB;
+// use Illuminate\Pagination\LengthAwarePaginator;
 
-class CategoryService
+class BookService
 {
   /**
-     * get all categories
+     * get all books
      *
      * @return collection
      */
-    public function getAllCategories()
+    public function getAllBooks()
     {
-        $categories = Category::paginate(5);
-        return $categories;
+        $books = Book::with(['category', 'author'])->paginate(5);
+        return $books;
     }
 
     /**
-     * store category
+     * store book
      */
     public function store($data)
     {
         try {
             DB::beginTransaction();
-            Category::create([
-                'name' => $data['name']
+            Book::create([
+                'name' => $data['name'],
+                'author_id' => $data['author_id'],
+                'category_id' => $data['category_id'],
             ]);
             DB::commit();
             return ['status' => 'success', 'message' => 'success'];
@@ -39,12 +43,14 @@ class CategoryService
     /**
      * update category
      */
-    public function update($request, Category $category)
+    public function update($request, $book)
     {
         try {
             DB::beginTransaction();
-            $category->update([
-                'name' => $request['name']
+            $book->update([
+                'name' => $request['name'],
+                'author_id' => $data['author_id'],
+                'category_id' => $data['category_id'],
             ]);
             DB::commit();
             // return ['status' => 'success', 'message' => 'success'];
@@ -56,12 +62,12 @@ class CategoryService
     }
 
     /**
-     * delete category
+     * delete book
      */
-    public function delete($category)
+    public function delete($book)
     {
         try {
-            $category->delete();
+            $book->delete();
             return ['status' => 'success', 'message' => 'success'];
         } catch (\Throwable $th) {
             DB::rollback();

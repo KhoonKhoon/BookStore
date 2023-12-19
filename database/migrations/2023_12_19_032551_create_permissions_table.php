@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAuthorsTable extends Migration
+class CreatePermissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateAuthorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('authors', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->index();
-            $table->date('dateofbirth')->nullable();
-            $table->string('bornIn')->nullable();
+            $table->string('app_module')->nullable();
+            $table->string('name')->nullable();
+            $table->string('code')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateAuthorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('authors');
+        Schema::dropIfExists('permissions');
     }
 }

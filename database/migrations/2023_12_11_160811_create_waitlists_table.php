@@ -15,6 +15,9 @@ class CreateWaitlistsTable extends Migration
     {
         Schema::create('waitlists', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->index();
+            $table->integer('book_id')->index();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

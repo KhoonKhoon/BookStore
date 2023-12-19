@@ -15,8 +15,6 @@ class CreateBookCopiesTable extends Migration
     {
         Schema::create('book_copies', function (Blueprint $table) {
             $table->id();
-            $table->integer('book_id');
-            $table->integer('numberofbooks');
             $table->timestamps();
         });
     }

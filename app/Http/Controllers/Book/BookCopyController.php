@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Permission;
+namespace App\Http\Controllers\Book;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book\BookCopy as BookBookCopy;
+use App\Models\BookCopy\BookCopy;
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller
+class BookCopyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +17,7 @@ class PermissionController extends Controller
     public function index()
     {
         //
+        return $this->bookCopyInterface->getAllBookCopies();
     }
 
     /**
@@ -25,6 +28,7 @@ class PermissionController extends Controller
     public function create()
     {
         //
+        return $this->bookCopyInterface->create();
     }
 
     /**
@@ -36,6 +40,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         //
+        return $this->bookCopyInterface->store();
     }
 
     /**
@@ -44,7 +49,7 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(BookCopy $bookCopy)
     {
         //
     }
@@ -55,7 +60,7 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(BookCopy $bookCopy)
     {
         //
     }
@@ -67,7 +72,7 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, BookCopy $bookCopy)
     {
         //
     }
@@ -78,7 +83,7 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         //
     }
