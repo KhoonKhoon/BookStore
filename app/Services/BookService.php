@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Book\Book;
 use App\Models\Category\Category;
+use App\Models\Author\Author;
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -16,7 +17,11 @@ class BookService
      */
     public function getAllBooks()
     {
-        $books = Book::with(['category', 'author'])->paginate(5);
+        // dd('serv');
+        // $authors = Book::all();
+        // dd($authors);
+        // dd(Book::with('author')->all()
+        $books = Book::with(['author','category'])->paginate(5);
         return $books;
     }
 
@@ -33,7 +38,7 @@ class BookService
                 'category_id' => $data['category_id'],
             ]);
             DB::commit();
-            return ['status' => 'success', 'message' => 'success'];
+            return ['status' => 'success', 'message' => 'Successfully created'];
         } catch (\Throwable $th) {
             DB::rollback();
             return ['status' => 'error', 'message' => 'something went wrong'];
@@ -49,14 +54,14 @@ class BookService
             DB::beginTransaction();
             $book->update([
                 'name' => $request['name'],
-                'author_id' => $data['author_id'],
-                'category_id' => $data['category_id'],
+                'author_id' => $request['author_id'],
+                'category_id' => $request['category_id'],
             ]);
             DB::commit();
-            // return ['status' => 'success', 'message' => 'success'];
+            return ['status' => 'success', 'message' => 'Successfully Changed!!'];
         } catch (\Throwable $th) {
             DB::rollback();
-            // return ['status' => 'error', 'message' => 'something went wrong'];
+            return ['status' => 'error', 'message' => 'something went wrong'];
         }
 
     }
@@ -68,7 +73,7 @@ class BookService
     {
         try {
             $book->delete();
-            return ['status' => 'success', 'message' => 'success'];
+            return ['status' => 'success', 'message' => 'Successfully Deleted'];
         } catch (\Throwable $th) {
             DB::rollback();
 

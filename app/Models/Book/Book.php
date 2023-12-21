@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Book extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $fillable = ['name', 'author_id', 'category_id'];
 
     public function category()
@@ -20,5 +20,6 @@ class Book extends Model
     public function author()
     {
         return $this->belongsTo(Author::class);
+
     }
 }

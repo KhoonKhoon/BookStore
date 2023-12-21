@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
+use App\Interfaces\AuthorInterface;
+use App\Models\Author\Author;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -12,10 +14,16 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $authorInterface;
+
+    public function __construct(AuthorInterface $authorInterface)
+    {
+        $this->authorInterface = $authorInterface;
+    }
     public function index()
     {
         //
-        dd('ww');
+        return $this->authorInterface->getAllAuthors();
     }
 
     /**
@@ -26,6 +34,7 @@ class AuthorController extends Controller
     public function create()
     {
         //
+        return $this->authorInterface->create();
     }
 
     /**
@@ -36,7 +45,7 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->authorInterface->store($request->all());
     }
 
     /**
@@ -45,9 +54,10 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Author $author)
     {
         //
+        return $this->authorInterface->show($author);
     }
 
     /**
@@ -56,9 +66,10 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(AUthor $author)
     {
         //
+        return $this->authorInterface->edit($author);
     }
 
     /**
@@ -68,9 +79,10 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Author $author)
     {
         //
+        return $this->authorInterface->update($request, $author);
     }
 
     /**
@@ -79,8 +91,9 @@ class AuthorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Author $author)
     {
         //
+        return $this->authorInterface->delete($author);
     }
 }

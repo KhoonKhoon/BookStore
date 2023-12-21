@@ -52,9 +52,9 @@ class CategoryRepository implements CategoryInterface
   {
     $data = $this->categoryService->store($request);
     if ($data['status'] == 'success') {
-      request()->session()->flash('success', 'Successfully Save!');
+      request()->session()->flash('success', 'Successfully Created!');
     } else {
-      request()->session()->flash('error', 'Error occurred while adding task');
+      request()->session()->flash('error', 'Error occurred');
     }
     return redirect()->route('category.index');
   }
@@ -82,7 +82,14 @@ class CategoryRepository implements CategoryInterface
      */
   public function update($request, $category)
   {
-        return $this->categoryService->update($request, $category);
+    $data = $this->categoryService->update($request, $category);
+
+    if ($data['status'] == 'success') {
+        request()->session()->flash('success', 'Successfully Changed!');
+      } else {
+        request()->session()->flash('error', 'Error occurred');
+      }
+      return redirect()->route('category.index');
   }
 
     /**
@@ -92,6 +99,13 @@ class CategoryRepository implements CategoryInterface
      */
     public function delete($category)
     {
-        return $this->categoryService->delete($category);
+        $data = $this->categoryService->delete($category);
+
+    if ($data['status'] == 'success') {
+        request()->session()->flash('success', 'Successfully Deleted!');
+      } else {
+        request()->session()->flash('error', 'Error occurred');
+      }
+      return redirect()->route('category.index');
     }
 }

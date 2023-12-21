@@ -15,7 +15,7 @@
             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
                     <a class="nav-link" href="{{ route('book.index') }}">Books</a>
-                    {{-- <a class="nav-link" href="{{ route('bookcopy.index') }}">Book Copy List</a> --}}
+                    <a class="nav-link" href="#">Book Copy List</a>
                     <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
                     <a class="nav-link" href="{{ route('author.index') }}">Authors</a>
                 </nav>

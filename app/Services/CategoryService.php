@@ -29,10 +29,10 @@ class CategoryService
                 'name' => $data['name']
             ]);
             DB::commit();
-            return ['status' => 'success', 'message' => 'success'];
+            return ['status' => 'success'];
         } catch (\Throwable $th) {
             DB::rollback();
-            return ['status' => 'error', 'message' => 'something went wrong'];
+            return ['status' => 'error'];
         }
     }
 
@@ -47,10 +47,10 @@ class CategoryService
                 'name' => $request['name']
             ]);
             DB::commit();
-            // return ['status' => 'success', 'message' => 'success'];
+            return ['status' => 'success'];
         } catch (\Throwable $th) {
             DB::rollback();
-            // return ['status' => 'error', 'message' => 'something went wrong'];
+            return ['status' => 'error'];
         }
 
     }
@@ -62,11 +62,11 @@ class CategoryService
     {
         try {
             $category->delete();
-            return ['status' => 'success', 'message' => 'success'];
+            return ['status' => 'success'];
         } catch (\Throwable $th) {
             DB::rollback();
 
-            return ['status' => 'error', 'message' => 'something went wrong'];
+            return ['status' => 'error'];
     }
 }
 }

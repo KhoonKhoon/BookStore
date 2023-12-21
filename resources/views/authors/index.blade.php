@@ -8,13 +8,25 @@
             <i class="fas fa-plus"></i></a>
     </div>
     <div class="card-body">
+        @if (session('success'))
+        <div class="alert alert-success">
+           {{ session('success') }}
+       </div>
+   @endif
+
+   @if (session('error'))
+       <div class="alert alert-danger">
+           {{ session('error') }}
+       </div>
+   @endif
+
         <table class="table table-hover table-striped table-bordered my-3 px-5">
             <thead class="bg-secondary">
             <tr>
                 <td>No</td>
                 <td>Name</td>
                 <td>Date of Birth</td>
-                <td>Address</td>
+                <td>Born In</td>
                 <td style="width: 30%">Action</td>
             </tr>
         </thead>
@@ -27,7 +39,7 @@
                 <td scope="row" class="text-center">{{ $indexer + $loop->iteration }}</td>
                 <td>{{ $author->name }}</td>
                 <td>{{ $author->dateofbirth }}</td>
-                <td>{{ $author->address  }}</td>
+                <td>{{ $author->bornIn  }}</td>
                 <td>
                     <form action="{{ route('author.delete', $author) }}" method="post">
                         @csrf

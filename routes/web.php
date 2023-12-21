@@ -56,7 +56,12 @@ Route::group(['prefix'=>'books','as'=>'book.'], function(){
     Route::group(['prefix'=>'authors','as'=>'author.'], function(){
         Route::get('/index', [App\Http\Controllers\Author\AuthorController::class, 'index'])->name('index');
         Route::get('/create', [App\Http\Controllers\Author\AuthorController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\Author\AuthorController::class, 'store'])->name('store');
+        Route::get('/edit/{author?}',[App\Http\Controllers\Author\AuthorController::class, 'edit'])->name('edit');
+        Route::get('/show/{author?}',[App\Http\Controllers\Author\AuthorController::class, 'show'])->name('show');
 
+        Route::post('/update/{author?}', [App\Http\Controllers\Author\AuthorController::class, 'update'])->name('update');
+        Route::delete('/delete/{author?}', [App\Http\Controllers\Author\AuthorController::class, 'delete'])->name('delete');
     });
 //         Route::get('/index', [App\Http\Controllers\Author\AuthorController::class, 'index'])->name('index');
 //         Route::get('/create', [App\Http\Controllers\Author\AuthorController::class, 'create'])->name('create');

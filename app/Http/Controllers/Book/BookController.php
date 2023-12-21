@@ -16,6 +16,7 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $bookInterface;
     public function __construct(BookInterface $bookInterface)
     {
         $this->bookInterface = $bookInterface;
@@ -24,10 +25,9 @@ class BookController extends Controller
     public function index()
     {
         //
-        // $authors = Author::all();
-        // $categories = Category::all();
-        $books= $this->bookInterface->getAllBooks();
-return view('books.index', compact('books'));
+        $books = $this->bookInterface->getAllBooks();
+
+        return view('books.index', compact('books'));
 
     }
 
@@ -84,9 +84,10 @@ return view('books.index', compact('books'));
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        //
+        return $this->bookInterface->update($request, $book);
+
     }
 
     /**
@@ -97,8 +98,7 @@ return view('books.index', compact('books'));
      */
     public function delete(Book $book)
     {
-        //
-        // dd('controller');
-        return $this->bookInterface->delete($book);
+        $books =$this->bookInterface->delete($book);
+        return redirect()->route('book.index');
     }
 }

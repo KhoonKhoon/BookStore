@@ -5,7 +5,7 @@
         <div class="h5 headings">Editing Book</div>
     </div>
     <div class="card-body">
-        <form action="{{ route('book.store') }}" method="post" class="form-control m-3">
+        <form action="{{ route('book.update', $book) }}" method="post" class="form-control m-3">
             @csrf
                 <div class="row m-5">
                     <div class="col-md-2">

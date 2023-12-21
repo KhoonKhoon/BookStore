@@ -8,6 +8,19 @@
             <i class="fas fa-plus"></i></a>
     </div>
     <div class="card-body">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+
         <table class="table table-hover table-striped table-bordered my-3 px-5">
             <thead class="bg-secondary">
             <tr>
@@ -23,10 +36,12 @@
                 $indexer = $books->perPage() * $books->currentPage() - $books->perPage();
             @endphp
         @foreach ($books as $book)
+        {{-- @dd($book->get()); --}}
             <tr>
                 <td scope="row" class="text-center">{{ $indexer + $loop->iteration }}</td>
                 <td>{{ $book->name }}</td>
-                <td>{{ $book->author->name }}</td>
+                <td>{{ $book->author->first()->name }}</td>
+                {{-- <td>{{ $book->author->name}}</td> --}}
                 <td>{{ $book->category->name}}</td>
                 <td>
                     <form action="{{ route('book.delete', $book) }}" method="post">

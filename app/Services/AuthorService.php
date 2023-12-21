@@ -21,40 +21,41 @@ class AuthorService
     /**
      * store author
      */
-    public function store($data)
+    public function store($request)
     {
+        // dd($request);
         try {
             DB::beginTransaction();
-            Author::create([
-                'name' => $data['name'],
+            $author = Author::create([
+                'name' => $request['name'],
                 'dateofbirth' => $request['dateofbirth'],
-                'address' => $request['address']
+                'bornIn' => $request['bornIn'],
             ]);
             DB::commit();
-            return ['status' => 'success', 'message' => 'success'];
+            return ['status' => 'success'];
         } catch (\Throwable $th) {
             DB::rollback();
-            return ['status' => 'error', 'message' => 'something went wrong'];
+            return ['status' => 'error'];
         }
     }
 
     /**
      * update author
      */
-    public function update($request, author $author)
+    public function update($request, $author)
     {
         try {
             DB::beginTransaction();
             $author->update([
                 'name' => $request['name'],
                 'dateofbirth' => $request['dateofbirth'],
-                'address' => $request['address']
+                'bornIn' => $request['bornIn']
             ]);
             DB::commit();
-            // return ['status' => 'success', 'message' => 'success'];
+            return ['status' => 'success'];
         } catch (\Throwable $th) {
             DB::rollback();
-            // return ['status' => 'error', 'message' => 'something went wrong'];
+            return ['status' => 'error'];
         }
 
     }
@@ -66,11 +67,11 @@ class AuthorService
     {
         try {
             $author->delete();
-            return ['status' => 'success', 'message' => 'success'];
+            return ['status' => 'success'];
         } catch (\Throwable $th) {
             DB::rollback();
 
-            return ['status' => 'error', 'message' => 'something went wrong'];
+            return ['status' => 'error'];
     }
 }
 }

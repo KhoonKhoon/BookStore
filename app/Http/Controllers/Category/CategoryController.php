@@ -94,8 +94,8 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
-        $this->categoryInterface->update($request, $category);
-        return redirect()->route('category.index');
+        return $this->categoryInterface->update($request, $category);
+
     }
 
     /**
@@ -107,7 +107,7 @@ class CategoryController extends Controller
     public function delete(Category $category)
     {
         //
-        $this->categoryInterface->delete($category);
-        return redirect()->route('category.index');
+        return $this->categoryInterface->delete($category);
+
     }
 }

@@ -32,7 +32,7 @@ interface AuthorInterface
     /**
      * author update
      */
-    public function update($request, Author $author);
+    public function update($request, $author);
 
     /**
      * author delete

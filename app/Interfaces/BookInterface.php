@@ -32,7 +32,7 @@ interface BookInterface
     /**
      * book update
      */
-    public function update($request, Book $book);
+    public function update($request, $book);
 
     /**
      * book delete

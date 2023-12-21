@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Services\authorService;
 use App\Interfaces\AuthorInterface;
-AuthorInterfaceuse App\Models\author\author;
+use App\Models\Author\Author;
 
 class AuthorRepository implements AuthorInterface
 {
@@ -29,7 +29,8 @@ class AuthorRepository implements AuthorInterface
      */
     public function getAllAuthors()
     {
-        return $this->authorService->getAllAuthors();
+        $authors = $this->authorService->getAllAuthors();
+        return view('authors.index', compact('authors'));
 
     }
 
@@ -52,7 +53,7 @@ class AuthorRepository implements AuthorInterface
   {
     $data = $this->authorService->store($request);
     if ($data['status'] == 'success') {
-      request()->session()->flash('success', 'Successfully Save!');
+      request()->session()->flash('success', 'Successfully Created!');
     } else {
       request()->session()->flash('error', 'Error occurred while adding task');
     }
@@ -82,7 +83,13 @@ class AuthorRepository implements AuthorInterface
      */
   public function update($request, $author)
   {
-        return $this->authorService->update($request, $author);
+        $data = $this->authorService->update($request, $author);
+        if ($data['status'] == 'success') {
+            request()->session()->flash('success', 'Successfully Changed!');
+          } else {
+            request()->session()->flash('error', 'Error');
+          }
+          return redirect()->route('author.index');
   }
 
     /**
@@ -92,6 +99,12 @@ class AuthorRepository implements AuthorInterface
      */
     public function delete($author)
     {
-        return $this->authorService->delete($author);
+        $data = $this->authorService->delete($author);
+        if ($data['status'] == 'success') {
+            request()->session()->flash('success', 'Successfully Deleted!');
+          } else {
+            request()->session()->flash('error', 'Error occurred');
+          }
+          return redirect()->route('author.index');
     }
 }
