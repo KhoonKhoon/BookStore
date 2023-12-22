@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Models\Permission\Permission;
+use App\Models\Permission;
 
 class PermissionService
 {
  /**
      * get all user
-     * 
+     *
      * @return collection
      */
     public function getAllPermission()
@@ -40,6 +40,6 @@ class PermissionService
             dd($th);
             return ['status' => 'success'];
         }
-        
+
     }
 }

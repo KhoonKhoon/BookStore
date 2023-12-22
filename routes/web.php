@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Permission\PermissionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -52,28 +53,40 @@ Route::group(['prefix'=>'books','as'=>'book.'], function(){
 /**
     * Author
  */
+Route::group(['prefix'=>'authors','as'=>'author.'], function(){
+    Route::get('/index', [App\Http\Controllers\Author\AuthorController::class, 'index'])->name('index');
+    Route::get('/create', [App\Http\Controllers\Author\AuthorController::class, 'create'])->name('create');
+    Route::post('/store', [App\Http\Controllers\Author\AuthorController::class, 'store'])->name('store');
+    Route::get('/edit/{author?}',[App\Http\Controllers\Author\AuthorController::class, 'edit'])->name('edit');
+    Route::get('/show/{author?}',[App\Http\Controllers\Author\AuthorController::class, 'show'])->name('show');
 
-    Route::group(['prefix'=>'authors','as'=>'author.'], function(){
-        Route::get('/index', [App\Http\Controllers\Author\AuthorController::class, 'index'])->name('index');
-        Route::get('/create', [App\Http\Controllers\Author\AuthorController::class, 'create'])->name('create');
-        Route::post('/store', [App\Http\Controllers\Author\AuthorController::class, 'store'])->name('store');
-        Route::get('/edit/{author?}',[App\Http\Controllers\Author\AuthorController::class, 'edit'])->name('edit');
-        Route::get('/show/{author?}',[App\Http\Controllers\Author\AuthorController::class, 'show'])->name('show');
-
-        Route::post('/update/{author?}', [App\Http\Controllers\Author\AuthorController::class, 'update'])->name('update');
-        Route::delete('/delete/{author?}', [App\Http\Controllers\Author\AuthorController::class, 'delete'])->name('delete');
-    });
-//         Route::get('/index', [App\Http\Controllers\Author\AuthorController::class, 'index'])->name('index');
-//         Route::get('/create', [App\Http\Controllers\Author\AuthorController::class, 'create'])->name('create');
-//         Route::post('/store', [App\Http\Controllers\Author\AuthorController::class, 'store'])->name('store');
-//         Route::get('/edit/{author?}',[App\Http\Controllers\Author\AuthorController::class, 'edit'])->name('edit');
-//         Route::get('/show/{author?}',[App\Http\Controllers\Author\AuthorController::class, 'show'])->name('show');
-
-//         Route::post('/update/{author?}', [App\Http\Controllers\Author\AuthorController::class, 'update'])->name('update');
-//         Route::delete('/delete/{author?}', [App\Http\Controllers\Author\AuthorController::class, 'delete'])->name('delete');
-// });
-
+    Route::post('/update/{author?}', [App\Http\Controllers\Author\AuthorController::class, 'update'])->name('update');
+    Route::delete('/delete/{author?}', [App\Http\Controllers\Author\AuthorController::class, 'delete'])->name('delete');
 });
+
+/**
+    * User
+ */
+    Route::group(['prefix'=>'users','as'=>'user.'], function(){
+        Route::get('/index', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('create');
+        Route::post('/store', [App\Http\Controllers\Admin\UserController::class, 'store'])->name('store');
+        Route::get('/edit/{author?}',[App\Http\Controllers\Admin\UserController::class, 'edit'])->name('edit');
+        Route::get('/show/{author?}',[App\Http\Controllers\Admin\UserController::class, 'show'])->name('show');
+
+        Route::post('/update/{author?}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('update');
+        Route::delete('/delete/{author?}', [App\Http\Controllers\Admin\UserController::class, 'delete'])->name('delete');
+    });
+
+/**
+ * Permission
+ */
+    Route::group(['prefix'=>'permissions', 'as'=> 'permission.'], function(){
+        Route::get('/index', [PermissionController::class, 'index'])->name('index');
+    });
+});
+
+
 
 Auth::routes();
 

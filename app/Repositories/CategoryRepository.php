@@ -25,7 +25,7 @@ class CategoryRepository implements CategoryInterface
     /**
      * get all team
      *
-     * @return Array
+     * @return array
      */
     public function getAllCategories()
     {
@@ -36,7 +36,7 @@ class CategoryRepository implements CategoryInterface
     /**
      * get create data
      *
-     * @return Array
+     * @return array
      */
     public function create()
     {
@@ -46,7 +46,7 @@ class CategoryRepository implements CategoryInterface
     /**
      * store data
      *
-     * @return Array
+     * @return array
      */
     public function store($request)
   {
@@ -68,7 +68,7 @@ class CategoryRepository implements CategoryInterface
   /**
      * edit category
      *
-     * @return Array
+     * @return array
      */
   public function edit($category)
   {
@@ -78,7 +78,7 @@ class CategoryRepository implements CategoryInterface
   /**
      * edit  category
      *
-     * @return Array
+     * @return array
      */
   public function update($request, $category)
   {
@@ -95,7 +95,7 @@ class CategoryRepository implements CategoryInterface
     /**
      * delete category
      *
-     * @return Array
+     * @return array
      */
     public function delete($category)
     {

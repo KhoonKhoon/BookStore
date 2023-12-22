@@ -21,7 +21,7 @@ class Permission
         if (auth()->check() && (isSuperAdmin() || hasPermission($app_module, $code))) {
             return $next($request);
         }
-        
+
         abort(403, 'Unauthorized');
     }
 }

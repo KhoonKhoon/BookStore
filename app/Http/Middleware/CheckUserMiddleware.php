@@ -29,6 +29,9 @@ class CheckUserMiddleware
             case 'author':
                 $requestedUserId = $request->route('author') ? $request->route('author')->user_id : null;
                 break;
+            case 'user':
+                $requestedUserId = $request->route('user') ? $request->route('user')->user_id : null;
+                break;
             // case 'task_operation':
             //     $requestedUserId = $request->route('task_operation') ? $request->route('task_operation')->user_id : null;
             //     break;
