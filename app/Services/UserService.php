@@ -19,7 +19,7 @@ class UserService
      */
     public function getAllUsers()
     {
-        $users = User::paginate(5);
+        $users = User::paginate(4);
         return $users;
     }
 
@@ -28,13 +28,12 @@ class UserService
      */
     public function store($request)
     {
-        dd($request);
         try {
             DB::beginTransaction();
                 User::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
-                'password' => $request['password'],
+                'password' => Hash::make($request['password']),
                 'status' => $request['status']
             ]);
             DB::commit();
@@ -49,18 +48,18 @@ class UserService
     /**
      * update user
      */
-    public function update($data, $user)
+    public function update($request, $user)
     {
         try {
             DB::beginTransaction();
             $user_param = [
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'status' => $data['status']
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'status' => $request['status']
             ];
 
-            if ( $data['password'] ) {
-                $user_param['password'] = Hash::make($data['password']);
+            if ( $request['password'] ) {
+                $user_param['password'] = Hash::make($request['password']);
             }
 
             $user->update($user_param);

@@ -3,7 +3,7 @@
 @section('content')
 <div class="card m-4">
     <div class="card-header">
-        <div class=" h5 headings">Users</div>
+        <div class=" h5 headings">User Lists</div>
         <a href="{{ route('user.create') }}" class="btn btn-secondary float-end"> New User
             <i class="fas fa-plus"></i></a>
     </div>
@@ -40,27 +40,16 @@
                         <td>{{ $user->name  }} </td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->status }}</td>
-                        {{-- <td>
-                            @foreach ($user->teams as $team)
-                                <span class="badge badge-success rounded-pill p-1">{{ $team->name ?? '-' }}</span>
-                            @endforeach
-                        </td>
                         <td>
-                            @foreach ($user->roles as $role)
-                                <span class="badge badge-success rounded-pill p-1">{{ $role->name ?? '-' }}</span>
-                            @endforeach
-                        </td> --}}
-                        <td>
-                        <form action="{{ route('user.delete', $user) }}" method="post"></form>
+                            <form action="{{ route('user.delete', $user) }}" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <a href="{{ route('user.edit', $user) }}" class="btn btn-warning btn-hover"><i
                                         class="fa-regular fa-pen-to-square"></i></a>
                                 <a href="{{ route('permission.index', ['user' => $user->id]) }}"
                                     class="btn btn-success btn-hover"><i class="fa-solid fa-unlock-keyhole"></i></a>
-                                {{-- <a href="{{ route($status_route, ['user' => $user->id]) }}" class="complete-data btn  btn-hover {{ $user->status == 'inactive' ? 'btn-warning' : 'btn-primary' }}"><i class="fa-solid {{ $user->status == 'inactive' ? 'fa-xmark' : 'fa-check' }}"></i></a> --}}
-                                <button class="btn btn-danger btn-hover" type="submit"><i
-                                        class="fa-solid fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -69,6 +58,6 @@
     </div>
    </div>
     <div class="pt-2">
-        {{ $users->links() }}
+        {{ $users->withQueryString()->links() }}
     </div>
 @endsection

@@ -1,16 +1,16 @@
 @extends('layouts.admin-layout')
 
 @section('content')
-    <x-utils.card :attrs="['title' => 'Permission For ' . $user->name]">
-        <x-forms::form-tag :attrs="[
-            'id' => 'permission-form',
-            'formName' => 'permission-form',
-            'id' => 'permission-form',
-            'class' => 'permission-form',
-            'method' => $method,
-            'action' => $route,
-        ]">
+
+
+<div class="card m-4">
+    <div class="card-header">
+        <div class=" h5 headings">Permissions</div>
+
+    </div>
+    <div class="card-body">
             <div class="row">
+
                 @foreach ($permissions as $k => $permission)
                     <div class="column col-md-3">
                         <h6 class="fw-bold mb-2 pb-3">{{ strtoupper($k) }}</h6>
@@ -33,12 +33,12 @@
                 @endforeach
 
             </div>
-            </x-forms.form-tag>
+
             <div class="text-left pt-5">
 
                 <button type="submit" name="form-submit-button" form="permission-form" class="btn btn-primary btn-hover py-2">
                     {{ __($button) }}
                 </button>
             </div>
-    </x-utils.card>
+
 @endsection

@@ -22,7 +22,7 @@ interface UserInterface
     /**
      * get edit data
      */
-    public function editData($user);
+    public function edit($user);
 
     /**
      * user update
@@ -33,17 +33,8 @@ interface UserInterface
      * user delete
      */
     public function delete($user);
-     /**
-     * user status
-     */
-    public function status($user);
     /**
-     * user profile
+     * Logout
      */
-    public function profile($user);
-     /**
-     * user change
-     */
-    public function change($request, $user);
-
+    // public function logout();
 }

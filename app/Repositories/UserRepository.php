@@ -2,11 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\UserInterface;
 use App\Models\Role;
 use App\Models\Team;
 use App\Services\UserService;
+use App\Interfaces\UserInterface;
 use App\Traits\jsonResponseTrait;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class UserRepository implements UserInterface
@@ -51,8 +52,15 @@ class UserRepository implements UserInterface
      */
     public function store($request)
     {
-        dd($request->all());
-        return $this->userService->store($request);
+        $data = $this->userService->store($request->all());
+
+    if ($data['status'] == 'success') {
+        request()->session()->flash('success', 'Successfully Created!');
+      } else {
+        request()->session()->flash('error', 'Error occurred');
+      }
+        return redirect()->route('user.index');
+
     }
 
     /**
@@ -60,11 +68,9 @@ class UserRepository implements UserInterface
      *
      * @return array
      */
-    public function editData($user)
+    public function edit($user)
     {
-
-
-        //return $data;
+       return view('users.edit', compact('user'));
     }
 
     /**
@@ -74,9 +80,15 @@ class UserRepository implements UserInterface
      */
     public function update($request, $user)
     {
-        $data = $request->all();
 
-        return $this->userService->update($data, $user);
+        $data = $this->userService->update($request, $user);
+
+        if ($data['status'] == 'success') {
+            request()->session()->flash('success', 'Successfully Changed!');
+        } else {
+            request()->session()->flash('error', 'Error occurred');
+        }
+            return redirect()->route('user.index');
     }
 
 
@@ -87,40 +99,34 @@ class UserRepository implements UserInterface
      */
     public function delete($user)
     {
-        return $this->userService->delete($user);
+        $data= $this->userService->delete($user);
+
+        if ($data['status'] == 'success') {
+            request()->session()->flash('success', 'Successfully Deleted!');
+        } else {
+            request()->session()->flash('error', 'Error occurred');
+        }
+            return redirect()->route('user.index');
     }
 
-    public function profile($user)
-    {
-        $userRoles = Cache::rememberForever($user->id.'userRoles', function () use ($user){
-            return $user->roles;
-        });
-
-        $userTeams = Cache::rememberForever($user->id.'userTeams', function () use ($user) {
-            return $user->teams;
-        });
-
-        $data = [
-            'user' => $user,
-            'userRoles' => $userRoles,
-            'userTeams' => $userTeams,
-            'form_name' => 'User Edit',
-            'store_route' => route('user.change', $user),
-            'method' => 'POST',
-            'button' => 'Update'
-        ];
-
-        return $data;
-    }
 
     public function change($request, $user)
     {
         return $this->userService->change($request, $user);
     }
 
-    public function status($user)
-    {
-        $response = $this->userService->userStatus($user);
-        return $this->_privateResponse($response);
-    }
+    // public function status($user)
+    // {
+    //     $response = $this->userService->userStatus($user);
+    //     return $this->_privateResponse($response);
+    // }
+    /**
+     * logout
+     */
+    // public function logout()
+    // {
+    //     session->flush();
+    //     Auth::logout();
+    //     return redirect()->route('login');
+    // }
 }

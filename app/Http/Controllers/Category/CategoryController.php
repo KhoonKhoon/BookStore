@@ -30,8 +30,6 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-
         $categories = $this->categoryInterface->getAllCategories();
         return view('categories.index', compact('categories'));
     }

@@ -22,19 +22,19 @@ class PermissionRepository implements PermissionInterface
         $this->permissionService = $permissionService;
     }
 
-    public function getAllPermissions(Model $user)
+    public function getAllPermissions($user)
     {
         $permissions = $this->permissionService->getAllPermission();
-        $data = [
-            'permissions' => $permissions,
-            'method' => 'post',
-            'title' => 'Permission for '. $user->name,
-            'button' => 'Save',
-            'user' => $user,
-            'route' => route('permission.store', ['user' => $user->id]),
-            'given_permissions' => $user->permissions->pluck('id')->toArray()
-        ];
-        return $data;
+        // $data = [
+        //     'permissions' => $permissions,
+        //     'method' => 'post',
+        //     'title' => 'Permission for '. $user->name,
+        //     'button' => 'Save',
+        //     'user' => $user,
+        //     'route' => route('permission.store', ['user' => $user->id]),
+        //     'given_permissions' => $user->permissions->pluck('id')->toArray()
+        // ];
+        // return $data;
     }
 
     public function store($request, Model $user)

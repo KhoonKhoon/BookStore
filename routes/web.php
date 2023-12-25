@@ -71,11 +71,13 @@ Route::group(['prefix'=>'authors','as'=>'author.'], function(){
         Route::get('/index', [App\Http\Controllers\Admin\UserController::class, 'index'])->name('index');
         Route::get('/create', [App\Http\Controllers\Admin\UserController::class, 'create'])->name('create');
         Route::post('/store', [App\Http\Controllers\Admin\UserController::class, 'store'])->name('store');
-        Route::get('/edit/{author?}',[App\Http\Controllers\Admin\UserController::class, 'edit'])->name('edit');
-        Route::get('/show/{author?}',[App\Http\Controllers\Admin\UserController::class, 'show'])->name('show');
+        Route::get('/edit/{user?}',[App\Http\Controllers\Admin\UserController::class, 'edit'])->name('edit');
+        Route::get('/show/{user?}',[App\Http\Controllers\Admin\UserController::class, 'show'])->name('show');
 
-        Route::post('/update/{author?}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('update');
-        Route::delete('/delete/{author?}', [App\Http\Controllers\Admin\UserController::class, 'delete'])->name('delete');
+        Route::post('/update/{user?}', [App\Http\Controllers\Admin\UserController::class, 'update'])->name('update');
+        Route::delete('/delete/{user?}', [App\Http\Controllers\Admin\UserController::class, 'delete'])->name('delete');
+        Route::get('/logout', [App\Http\Controllers\Admin\UserController::class, 'logout'])->name('logout');
+
     });
 
 /**
@@ -84,17 +86,10 @@ Route::group(['prefix'=>'authors','as'=>'author.'], function(){
     Route::group(['prefix'=>'permissions', 'as'=> 'permission.'], function(){
         Route::get('/index', [PermissionController::class, 'index'])->name('index');
     });
+
+    Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
 });
-
-
-
 Auth::routes();
 
-
-// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

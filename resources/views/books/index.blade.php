@@ -41,7 +41,6 @@
                 <td scope="row" class="text-center">{{ $indexer + $loop->iteration }}</td>
                 <td>{{ $book->name }}</td>
                 <td>{{ $book->author->first()->name }}</td>
-                {{-- <td>{{ $book->author->name}}</td> --}}
                 <td>{{ $book->category->name}}</td>
                 <td>
                     <form action="{{ route('book.delete', $book) }}" method="post">

@@ -23,6 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(auth()->user()->status == "inactive")
+        {
+            return view('auth.login')->with('error', 'No access!');
+
+        }
+
         return view('layouts.main');
     }
 }
