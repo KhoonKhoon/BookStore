@@ -3,6 +3,7 @@
 namespace App\Models\Book;
 
 use App\Models\Author\Author;
+use App\Models\BookCopy\BookCopy;
 use App\Models\Category\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,5 +22,10 @@ class Book extends Model
     {
         return $this->belongsTo(Author::class);
 
+    }
+
+    public function bookcopies()
+    {
+        return $this->hasMany(BookCopy::class);
     }
 }

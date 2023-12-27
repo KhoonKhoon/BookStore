@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Models\Author;
+namespace App\Models\BookCopy;
 
 use App\Models\Book\Book;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Author extends Model
+class BookCopy extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['name', 'dateofbirth','bornIn'];
 
-    public function books()
+    protected $fillable = ['book_id', 'quantity'];
+
+    public function book()
     {
-        return $this->hasMany(Book::class);
+        return $this->belongsTo(Book::class);
     }
 }

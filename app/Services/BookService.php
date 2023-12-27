@@ -17,10 +17,6 @@ class BookService
      */
     public function getAllBooks()
     {
-        // dd('serv');
-        // $authors = Book::all();
-        // dd($authors);
-        // dd(Book::with('author')->all()
         $books = Book::with(['author','category'])->paginate(5);
         return $books;
     }
@@ -30,12 +26,14 @@ class BookService
      */
     public function store($data)
     {
+        // $imagePath = $data->file('photo')->store('images', 'public');
         try {
             DB::beginTransaction();
             Book::create([
                 'name' => $data['name'],
                 'author_id' => $data['author_id'],
                 'category_id' => $data['category_id'],
+                // 'photo' => $imagePath
             ]);
             DB::commit();
             return ['status' => 'success', 'message' => 'Successfully created'];

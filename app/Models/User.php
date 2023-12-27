@@ -43,4 +43,44 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'user_permissions');
+    }
+
+    /**
+     * is super admin
+     */
+    public function isSuperAdmin()
+    {
+        return ($this->id ?? 0) === 1;
+    }
+    /**
+     * permission
+     */
+    public function hasPermission($module, $code)
+    {
+        return in_array(
+            $code,
+            $this->cachedPermissions()->where('app_module', strtolower($module))
+                ->where('code', $code)
+                ->pluck('code', 'name')->toArray()
+        );
+    }
+
+
+    /**
+     * cached permission
+     */
+    public function cachedPermissions()
+    {
+        $key = 'permissions_' . $this->id;
+
+        return cache()->rememberForever($key, function () {
+            return $this->permissions;
+        });
+    }
+
+
 }

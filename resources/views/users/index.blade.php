@@ -46,7 +46,7 @@
                                 @csrf
                                 <a href="{{ route('user.edit', $user) }}" class="btn btn-warning btn-hover"><i
                                         class="fa-regular fa-pen-to-square"></i></a>
-                                <a href="{{ route('permission.index', ['user' => $user->id]) }}"
+                                <a href="{{ route('permission.index', $user) }}"
                                     class="btn btn-success btn-hover"><i class="fa-solid fa-unlock-keyhole"></i></a>
                                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                             </form>

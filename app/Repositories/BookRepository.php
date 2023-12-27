@@ -27,22 +27,20 @@ class BookRepository implements BookInterface
     /**
      * get all books
      *
-     * @return Array
+     * @return array
      */
     public function getAllBooks()
     {
-        // dd('repo');
         return  $this->bookService->getAllBooks();
     }
 
     /**
      * get create data
      *
-     * @return Array
+     * @return array
      */
     public function create()
     {
-
         $authors = Author::all();
         $categories = Category::all();
         return view('books.create', compact(['authors', 'categories']));
@@ -51,10 +49,11 @@ class BookRepository implements BookInterface
     /**
      * store data
      *
-     * @return Array
+     * @return array
      */
     public function store($request)
   {
+    
     $data =$this->bookService->store($request);
     if ($data['status'] == 'success') {
       request()->session()->flash('success', 'Successfully Created!');
@@ -68,9 +67,6 @@ class BookRepository implements BookInterface
    */
   public function show($book)
   {
-
-    // $authors = Author::all();
-    // $categories = Category::all();
     return view('books.show', compact('book'));
 
     // return view('books.show', compact(['book', 'authors','categories']));
@@ -78,7 +74,7 @@ class BookRepository implements BookInterface
   /**
      * edit book
      *
-     * @return Arrays
+     * @return arrays
      */
   public function edit($book)
   {
@@ -90,7 +86,7 @@ class BookRepository implements BookInterface
   /**
      * edit  book
      *
-     * @return Array
+     * @return array
      */
   public function update($request, $book)
   {
@@ -106,7 +102,7 @@ class BookRepository implements BookInterface
     /**
      * delete book
      *
-     * @return Array
+     * @return array
      */
     public function delete($book)
     {

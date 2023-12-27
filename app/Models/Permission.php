@@ -12,7 +12,7 @@ class Permission extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'permissions';
-    protected $fillable = [];
+    protected $fillable = ['app_module', 'name', 'code'];
 
 
     /**

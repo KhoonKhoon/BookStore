@@ -17,7 +17,7 @@ class PermissionService
         return $permissions;
     }
 
-    public function store($request , $user)
+    public function store($request, $user)
     {
         $all_permissions = $request->permissions?? [];
         $prepared_permissions = [];
@@ -34,7 +34,7 @@ class PermissionService
 
            // Delete All Cached Permissions and Roles
             cache()->forget('permissions_' . $user->id);
-            cache()->forget('roles' . $user->id);
+            // cache()->forget('roles' . $user->id);
             return ['status' => 'success'];
         } catch (\Throwable $th) {
             dd($th);

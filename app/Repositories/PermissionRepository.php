@@ -24,25 +24,19 @@ class PermissionRepository implements PermissionInterface
 
     public function getAllPermissions($user)
     {
-        $permissions = $this->permissionService->getAllPermission();
-        // $data = [
-        //     'permissions' => $permissions,
-        //     'method' => 'post',
-        //     'title' => 'Permission for '. $user->name,
-        //     'button' => 'Save',
-        //     'user' => $user,
-        //     'route' => route('permission.store', ['user' => $user->id]),
-        //     'given_permissions' => $user->permissions->pluck('id')->toArray()
-        // ];
-        // return $data;
+        $permissions =  $this->permissionService->getAllPermission();
+        $given_permissions = $user->permissions->pluck('id')->toArray();
+        return view('permissions.index', compact(['permissions', 'given_permissions', 'user']));
+
     }
 
     public function store($request, Model $user)
     {
+
         $permission = $this->permissionService->store($request, $user);
 
         if ($permission['status'] == 'success') {
-            request()->session()->flash('success', 'Successfuly user permission!');
+            request()->session()->flash('success', 'Successful giving user permission!');
         } else {
             request()->session()->flash('error', 'Error occurred while adding permission');
         }

@@ -84,12 +84,30 @@ Route::group(['prefix'=>'authors','as'=>'author.'], function(){
  * Permission
  */
     Route::group(['prefix'=>'permissions', 'as'=> 'permission.'], function(){
-        Route::get('/index', [PermissionController::class, 'index'])->name('index');
+        Route::get('/index/{user?}', [PermissionController::class, 'index'])->name('index');
+        Route::post('/store/{user?}', [PermissionController::class, 'store'])->name('store');
+
     });
 
+/**
+    * Author
+ */
+Route::group(['prefix'=>'bookcopies','as'=>'bookcopy.'], function(){
+    Route::get('/index', [App\Http\Controllers\BookCopy\BookCopyController::class, 'index'])->name('index');
+    Route::get('/create', [App\Http\Controllers\BookCopy\BookCopyController::class, 'create'])->name('create');
+    Route::post('/store', [App\Http\Controllers\BookCopy\BookCopyController::class, 'store'])->name('store');
+    Route::get('/edit/{bookcopy?}',[App\Http\Controllers\BookCopy\BookCopyController::class, 'edit'])->name('edit');
+    Route::get('/show/{bookcopy?}',[App\Http\Controllers\BookCopy\BookCopyController::class, 'show'])->name('show');
+
+    Route::post('/update/{bookcopy?}', [App\Http\Controllers\BookCopy\BookCopyController::class, 'update'])->name('update');
+    Route::delete('/delete/{bookcopy?}', [App\Http\Controllers\BookCopy\BookCopyController::class, 'delete'])->name('delete');
+});
+
+/**
+ * Order
+ */
     Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

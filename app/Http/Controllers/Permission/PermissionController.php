@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Interfaces\PermissionInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class PermissionController extends Controller
 {
@@ -26,8 +27,7 @@ class PermissionController extends Controller
 
     public function index(User $user)
     {
-        $data = $this->permissionInterface->getAllPermissions($user);
-        return view('permission.index', $data);
+        return  $this->permissionInterface->getAllPermissions($user);
     }
 
     public function store(Request $request,User $user)
